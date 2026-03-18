@@ -19,6 +19,9 @@ app.include_router(auth_router)
 from app.routers.applications import router as app_router
 app.include_router(app_router)
 
+from app.routers.documents import router as doc_router
+app.include_router(doc_router)
+
 
 @app.get("/health")
 def health():
