@@ -12,7 +12,8 @@ from app.models.user import User
 from app.models.token import RefreshToken, PasswordResetToken
 from app.schemas.auth import (
     RegisterRequest, LoginRequest, TokenResponse,
-    UserResponse, ForgotPasswordRequest, ResetPasswordRequest
+    UserResponse, ForgotPasswordRequest, ResetPasswordRequest,
+    LogoutRequest, RefreshRequest
 )
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
@@ -62,9 +63,9 @@ async def login(data: LoginRequest, db: AsyncSession = Depends(get_db)):
     return TokenResponse(access_token=access_token, refresh_token=raw_refresh)
 
 @router.post("/logout")
-async def logout(refresh_token: str, db: AsyncSession = Depends(get_db)):
+async def logout(data: LogoutRequest, db: AsyncSession = Depends(get_db)):
     rt = await db.scalar(
-        select(RefreshToken).where(RefreshToken.token_hash == hash_token(refresh_token))
+        select(RefreshToken).where(RefreshToken.token_hash == hash_token(data.refresh_token))
     )
     if rt:
         rt.revoked = True
@@ -72,10 +73,10 @@ async def logout(refresh_token: str, db: AsyncSession = Depends(get_db)):
     return {"message": "Logged out"}
 
 @router.post("/refresh", response_model=TokenResponse)
-async def refresh(refresh_token: str, db: AsyncSession = Depends(get_db)):
+async def refresh(data: RefreshRequest, db: AsyncSession = Depends(get_db)):
     rt = await db.scalar(
         select(RefreshToken).where(
-            RefreshToken.token_hash == hash_token(refresh_token),
+            RefreshToken.token_hash == hash_token(data.refresh_token),
             RefreshToken.revoked == False,
             RefreshToken.expires_at > datetime.utcnow(),
         )
