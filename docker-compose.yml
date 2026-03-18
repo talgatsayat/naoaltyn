@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: uba
+      POSTGRES_PASSWORD: uba_pass
+      POSTGRES_DB: uba_portal
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+
+  backend:
+    build: ./backend
+    ports: ["8000:8000"]
+    env_file: ./backend/.env
+    depends_on: [db]
+    volumes:
+      - ./backend:/app
+      - ./backend/uploads:/app/uploads
+
+  frontend:
+    build: ./frontend
+    ports: ["5173:5173"]
+    volumes: ["./frontend:/app"]
+    environment:
+      - VITE_API_URL=http://localhost:8000
+
+volumes:
+  pgdata:
