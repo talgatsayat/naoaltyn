@@ -1,0 +1,67 @@
+<h2>Архитектура системы</h2>
+<p class="subtitle">Общая схема — как всё взаимодействует. Выглядит правильно?</p>
+
+<div class="mockup">
+  <div class="mockup-header">Высокоуровневая архитектура</div>
+  <div class="mockup-body" style="padding:20px;font-size:13px">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+      <div style="background:#eef4ff;border:2px solid #1a56a0;border-radius:8px;padding:14px">
+        <div style="font-weight:700;color:#1a56a0;margin-bottom:8px">🌐 React Frontend</div>
+        <div style="color:#333;line-height:1.7">
+          • Публичный сайт<br>
+          • Портал заявителя<br>
+          • Админ-панель<br>
+          • 3 языка (ru/kz/en)<br>
+          • Стиль uba.edu.kz
+        </div>
+      </div>
+      <div style="background:#fff8ee;border:2px solid #f0a500;border-radius:8px;padding:14px">
+        <div style="font-weight:700;color:#b07000;margin-bottom:8px">⚙️ FastAPI Backend</div>
+        <div style="color:#333;line-height:1.7">
+          • REST API<br>
+          • JWT аутентификация<br>
+          • Загрузка файлов<br>
+          • Email-уведомления<br>
+          • 4 типа заявок
+        </div>
+      </div>
+      <div style="background:#f0fff4;border:2px solid #2d8653;border-radius:8px;padding:14px">
+        <div style="font-weight:700;color:#2d8653;margin-bottom:8px">🗄️ PostgreSQL + Файлы</div>
+        <div style="color:#333;line-height:1.7">
+          • Пользователи<br>
+          • Заявки<br>
+          • Документы<br>
+          • Статусы / история<br>
+          • Файлы на диске
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;color:#888;margin:12px 0;font-size:12px">── HTTP / REST API ──</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:#fdf0f0;border:1px solid #c0392b;border-radius:8px;padding:12px">
+        <div style="font-weight:700;color:#c0392b;margin-bottom:6px">👤 Заявитель</div>
+        <div style="color:#333;font-size:12px;line-height:1.7">
+          Регистрация → Вход → Новая заявка →<br>
+          Заполнение формы (физ. или юр. лицо) →<br>
+          Загрузка документов → Отслеживание статуса
+        </div>
+      </div>
+      <div style="background:#f0f0fd;border:1px solid #6c3483;border-radius:8px;padding:12px">
+        <div style="font-weight:700;color:#6c3483;margin-bottom:6px">🛡️ Администратор</div>
+        <div style="color:#333;font-size:12px;line-height:1.7">
+          Вход → Список заявок (фильтры) →<br>
+          Просмотр деталей + скачивание документов →<br>
+          Смена статуса → Email заявителю
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;background:#f8f8f8;border-radius:8px;padding:12px;font-size:12px;color:#555">
+      <b>Интеграция с uba.edu.kz:</b> React-приложение размещается на поддомене (например <code>apply.uba.edu.kz</code>),
+      стиль копирует основной сайт. Существующий сайт не трогается — просто добавляется кнопка «Подать заявку».
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+{
+  "nav": { "home": "Home", "login": "Login", "register": "Register", "dashboard": "My Applications", "logout": "Logout" },
+  "landing": { "hero_title": "НАО Altynsarin Application Portal", "hero_subtitle": "Submit your application for courses, vacancies, research projects or internships", "apply_btn": "Apply Now", "types_title": "Application Types" },
+  "app_types": { "courses": "Professional Development Courses", "jobs": "Employment / Vacancies", "research": "Research Projects & Grants", "internship": "Internship" },
+  "status": { "draft": "Draft", "pending": "Under Review", "approved": "Approved", "rejected": "Rejected" },
+  "form": { "first_name": "First Name", "last_name": "Last Name", "email": "Email", "next": "Next", "back": "Back", "submit": "Submit Application" },
+  "errors": { "required": "Required field" }
+}

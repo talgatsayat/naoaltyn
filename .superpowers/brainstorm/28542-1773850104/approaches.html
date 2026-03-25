@@ -1,0 +1,71 @@
+<h2>Как будем строить систему?</h2>
+<p class="subtitle">3 подхода к технической реализации — выберите один</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="A" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#eef4ff;padding:16px;font-size:12px;line-height:1.6">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span style="background:#1a56a0;color:#fff;padding:4px 10px;border-radius:4px">Next.js</span>
+        <span style="font-size:18px;color:#888">+</span>
+        <span style="background:#336791;color:#fff;padding:4px 10px;border-radius:4px">PostgreSQL</span>
+        <span style="font-size:18px;color:#888">+</span>
+        <span style="background:#f0a500;color:#fff;padding:4px 10px;border-radius:4px">Файлы локально</span>
+      </div>
+      <div style="margin-top:12px;color:#444">
+        ✅ Один проект — и сайт, и API, и база<br>
+        ✅ Быстро развернуть, легко расширять<br>
+        ✅ Подходит для тестовой и боевой версии<br>
+        ⚡ 3 языка через next-intl<br>
+        📁 Файлы хранятся на сервере (позже → S3)
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Next.js монолит ⭐ Рекомендую</h3>
+      <p>Современный фреймворк, всё в одном проекте. Лучший выбор для MVP и дальнейшего роста.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="B" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#fff8ee;padding:16px;font-size:12px;line-height:1.6">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span style="background:#61dafb;color:#000;padding:4px 10px;border-radius:4px">React</span>
+        <span style="font-size:18px;color:#888">+</span>
+        <span style="background:#009688;color:#fff;padding:4px 10px;border-radius:4px">FastAPI (Python)</span>
+        <span style="font-size:18px;color:#888">+</span>
+        <span style="background:#336791;color:#fff;padding:4px 10px;border-radius:4px">PostgreSQL</span>
+      </div>
+      <div style="margin-top:12px;color:#444">
+        ✅ Отдельный бэкенд — легче интегрировать с uba.edu.kz<br>
+        ✅ Python удобен если есть Python-разработчики<br>
+        ⚠️ Два отдельных сервиса — сложнее деплой<br>
+        ⚠️ Дольше настраивать
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — React + FastAPI (раздельный)</h3>
+      <p>Фронтенд и бэкенд отдельно. Хорошо если команда на Python.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="C" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f0fff4;padding:16px;font-size:12px;line-height:1.6">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span style="background:#777bb4;color:#fff;padding:4px 10px;border-radius:4px">PHP / Laravel</span>
+        <span style="font-size:18px;color:#888">+</span>
+        <span style="background:#00758f;color:#fff;padding:4px 10px;border-radius:4px">MySQL</span>
+      </div>
+      <div style="margin-top:12px;color:#444">
+        ✅ Легко хостить на любом дешёвом сервере<br>
+        ✅ Многие казахстанские сайты на PHP<br>
+        ⚠️ Устаревший подход<br>
+        ⚠️ Хуже для 3-языкового интерфейса
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Laravel + MySQL (классика)</h3>
+      <p>Традиционный подход, простой хостинг на shared-сервере.</p>
+    </div>
+  </div>
+
+</div>

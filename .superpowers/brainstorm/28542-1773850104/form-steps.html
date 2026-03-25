@@ -1,0 +1,44 @@
+<h2>Какая структура шагов подачи заявки?</h2>
+<p class="subtitle">Выберите подходящий вариант для многошаговой формы</p>
+
+<div class="cards">
+  <div class="card" data-choice="A" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f0f4ff;padding:16px;font-size:13px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div style="background:#1a56a0;color:#fff;padding:6px 10px;border-radius:4px;white-space:nowrap">1. Об ученике</div>
+        <div style="background:#dde6f4;color:#333;padding:6px 10px;border-radius:4px;white-space:nowrap">2. О родителе</div>
+        <div style="background:#dde6f4;color:#333;padding:6px 10px;border-radius:4px;white-space:nowrap">3. Предыдущая школа</div>
+        <div style="background:#dde6f4;color:#333;padding:6px 10px;border-radius:4px;white-space:nowrap">4. Документы</div>
+      </div>
+      <div style="margin-top:12px;color:#555;line-height:1.5">
+        <b>Шаг 1:</b> ФИО, дата рождения, класс поступления, гражданство<br>
+        <b>Шаг 2:</b> ФИО родителя, телефон, email, ИИН<br>
+        <b>Шаг 3:</b> Название школы, класс, средний балл<br>
+        <b>Шаг 4:</b> Загрузка 4 документов (PDF/JPG)
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — 4 шага (стандарт как у QSI)</h3>
+      <p>Классический пошаговый процесс, прогресс-бар сверху</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="B" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f0f4ff;padding:16px;font-size:13px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div style="background:#1a56a0;color:#fff;padding:6px 10px;border-radius:4px;white-space:nowrap">1. Об ученике</div>
+        <div style="background:#dde6f4;color:#333;padding:6px 10px;border-radius:4px;white-space:nowrap">2. О родителе</div>
+        <div style="background:#dde6f4;color:#333;padding:6px 10px;border-radius:4px;white-space:nowrap">3. Документы</div>
+      </div>
+      <div style="margin-top:12px;color:#555;line-height:1.5">
+        <b>Шаг 1:</b> ФИО, дата рождения, класс, гражданство, предыдущая школа<br>
+        <b>Шаг 2:</b> ФИО родителя, телефон, email, ИИН, адрес<br>
+        <b>Шаг 3:</b> Загрузка документов + подтверждение
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — 3 шага (упрощённый)</h3>
+      <p>Быстрее заполнять, информация о школе включена в шаг 1</p>
+    </div>
+  </div>
+</div>

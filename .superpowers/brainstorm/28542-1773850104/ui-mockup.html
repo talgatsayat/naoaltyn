@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Макет страниц — НАО Алтынсарина</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f2f4f8; color: #222; }
+
+  .page-title { text-align:center; padding: 24px 16px 8px; font-size: 20px; font-weight: 700; color: #1a3a6b; }
+  .page-subtitle { text-align:center; color: #666; font-size: 14px; margin-bottom: 24px; }
+
+  .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; padding: 0 16px; }
+  .tab { padding: 8px 20px; border-radius: 20px; border: 2px solid #1a3a6b; color: #1a3a6b; font-size: 13px; cursor: pointer; background: #fff; font-weight: 600; transition: all .2s; }
+  .tab.active { background: #1a3a6b; color: #fff; }
+
+  .screen { display: none; max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+  .screen.active { display: block; }
+
+  /* NAV */
+  .nav { background: #1a3a6b; color: #fff; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-logo { font-weight: 700; font-size: 15px; }
+  .nav-logo span { color: #f0c040; }
+  .nav-links { display: flex; gap: 20px; font-size: 13px; }
+  .nav-links a { color: #cde; text-decoration: none; }
+  .nav-right { display: flex; gap: 10px; align-items: center; font-size: 12px; }
+  .lang-btn { background: rgba(255,255,255,0.15); border: none; color: #fff; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; }
+  .lang-btn.active { background: #f0c040; color: #1a3a6b; font-weight: 700; }
+  .btn-apply { background: #f0c040; color: #1a3a6b; border: none; padding: 7px 16px; border-radius: 4px; font-weight: 700; font-size: 13px; cursor: pointer; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #1a3a6b 60%, #2a5298); color: #fff; padding: 48px 24px; text-align: center; }
+  .hero h1 { font-size: 24px; margin-bottom: 12px; line-height: 1.4; }
+  .hero p { font-size: 14px; color: #b8d0f0; margin-bottom: 24px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero-btns .btn-primary { background: #f0c040; color: #1a3a6b; border: none; padding: 12px 28px; border-radius: 6px; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .hero-btns .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; }
+
+  /* CARDS */
+  .section { padding: 32px 0; }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a3a6b; margin-bottom: 16px; padding: 0 24px; }
+  .app-types { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 24px; }
+  .app-card { background: #fff; border-radius: 8px; padding: 16px; border-left: 4px solid #1a3a6b; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .app-card-icon { font-size: 24px; margin-bottom: 8px; }
+  .app-card h3 { font-size: 14px; font-weight: 700; color: #1a3a6b; margin-bottom: 4px; }
+  .app-card p { font-size: 12px; color: #666; line-height: 1.5; }
+
+  /* FORM */
+  .form-container { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin: 16px 0; }
+  .progress-bar { display: flex; background: #eef2fa; }
+  .progress-step { flex: 1; padding: 12px 8px; text-align: center; font-size: 11px; color: #888; border-bottom: 3px solid transparent; font-weight: 600; }
+  .progress-step.done { color: #2d8653; border-color: #2d8653; }
+  .progress-step.active { color: #1a3a6b; border-color: #1a3a6b; background: #f0f4ff; }
+  .form-body { padding: 24px; }
+  .form-body h3 { font-size: 16px; font-weight: 700; color: #1a3a6b; margin-bottom: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-group label { font-size: 11px; color: #555; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+  .form-group input, .form-group select { border: 1px solid #d0d8e8; border-radius: 5px; padding: 9px 12px; font-size: 13px; color: #222; background: #fafbfd; }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: #1a3a6b; }
+  .radio-group { display: flex; gap: 16px; }
+  .radio-group label { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #333; cursor: pointer; }
+  .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid #eee; }
+  .btn-next { background: #1a3a6b; color: #fff; border: none; padding: 10px 24px; border-radius: 5px; font-weight: 700; font-size: 13px; cursor: pointer; }
+  .btn-back { background: #fff; color: #1a3a6b; border: 2px solid #1a3a6b; padding: 10px 24px; border-radius: 5px; font-weight: 700; font-size: 13px; cursor: pointer; }
+
+  /* UPLOAD */
+  .upload-zone { border: 2px dashed #aac; border-radius: 8px; padding: 20px; text-align: center; background: #f8faff; margin-bottom: 10px; }
+  .upload-zone .upload-icon { font-size: 28px; margin-bottom: 6px; }
+  .upload-zone p { font-size: 12px; color: #666; }
+  .upload-zone span { font-size: 11px; color: #aaa; }
+  .file-list { display: flex; flex-direction: column; gap: 6px; }
+  .file-item { display: flex; align-items: center; gap: 8px; background: #f0f4ff; border-radius: 5px; padding: 8px 12px; font-size: 12px; }
+  .file-item .file-icon { color: #c0392b; }
+  .file-item .file-name { flex: 1; color: #333; }
+  .file-item .file-status { color: #2d8653; font-weight: 600; }
+
+  /* ADMIN */
+  .admin-layout { display: grid; grid-template-columns: 200px 1fr; min-height: 400px; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin: 16px 0; }
+  .admin-sidebar { background: #1a3a6b; color: #fff; padding: 16px 0; }
+  .admin-sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7090c0; padding: 0 16px 12px; }
+  .admin-menu-item { padding: 10px 16px; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; color: #cde; }
+  .admin-menu-item.active { background: rgba(255,255,255,0.15); color: #fff; font-weight: 600; border-left: 3px solid #f0c040; }
+  .admin-content { padding: 20px; background: #f7f9fc; }
+  .admin-content h3 { font-size: 16px; font-weight: 700; color: #1a3a6b; margin-bottom: 14px; }
+  .filter-bar { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .filter-btn { padding: 5px 12px; border-radius: 12px; border: 1px solid #d0d8e8; font-size: 11px; cursor: pointer; background: #fff; color: #555; }
+  .filter-btn.active { background: #1a3a6b; color: #fff; border-color: #1a3a6b; }
+  .table { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; border-radius: 6px; overflow: hidden; }
+  .table th { background: #eef2fa; color: #1a3a6b; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+  .table td { padding: 10px 12px; border-bottom: 1px solid #f0f2f8; color: #333; }
+  .badge { display: inline-block; padding: 3px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-pending { background: #fff3cd; color: #856404; }
+  .badge-approved { background: #d1fae5; color: #065f46; }
+  .badge-rejected { background: #fee2e2; color: #991b1b; }
+  .action-btn { background: #1a3a6b; color: #fff; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; }
+
+  /* FOOTER */
+  .footer { background: #1a3a6b; color: #8aaddc; font-size: 12px; padding: 20px 24px; text-align: center; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="page-title">Макет страниц — Портал НАО Алтынсарина</div>
+<div class="page-subtitle">Переключайтесь между страницами внизу</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="show('landing')">🏠 Главная</div>
+  <div class="tab" onclick="show('form')">📝 Форма заявки</div>
+  <div class="tab" onclick="show('admin')">🛡️ Админ-панель</div>
+</div>
+
+<!-- LANDING -->
+<div class="screen active" id="landing">
+  <div class="nav">
+    <div class="nav-logo">НАО <span>Алтынсарина</span></div>
+    <div class="nav-links">
+      <a href="#">Главная</a>
+      <a href="#">О портале</a>
+      <a href="#">Контакты</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn active">РУ</button>
+      <button class="lang-btn">ҚЗ</button>
+      <button class="lang-btn">EN</button>
+      <button class="btn-apply">Войти</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Портал подачи заявок<br>НАО «Алтынсарина»</h1>
+    <p>Подайте заявку на курсы повышения квалификации, вакансии, научные проекты или стажировку в одном месте</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Подать заявку</button>
+      <button class="btn-secondary">Узнать подробнее</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Типы заявок</div>
+    <div class="app-types">
+      <div class="app-card">
+        <div class="app-card-icon">📚</div>
+        <h3>Курсы повышения квалификации</h3>
+        <p>Запишитесь на обучение для педагогических работников</p>
+      </div>
+      <div class="app-card">
+        <div class="app-card-icon">💼</div>
+        <h3>Трудоустройство / Вакансии</h3>
+        <p>Подайте документы на открытые должности в академии</p>
+      </div>
+      <div class="app-card">
+        <div class="app-card-icon">🔬</div>
+        <h3>Научные проекты и гранты</h3>
+        <p>Подайте заявку на участие в исследовательских программах</p>
+      </div>
+      <div class="app-card">
+        <div class="app-card-icon">🎓</div>
+        <h3>Стажировка</h3>
+        <p>Молодые специалисты — подайте заявку на стажировку</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">© 2025 НАО «Национальная академия образования имени И. Алтынсарина» | Алматы</div>
+</div>
+
+<!-- FORM -->
+<div class="screen" id="form">
+  <div class="nav">
+    <div class="nav-logo">НАО <span>Алтынсарина</span></div>
+    <div class="nav-right">
+      <button class="lang-btn active">РУ</button>
+      <button class="lang-btn">ҚЗ</button>
+      <button class="lang-btn">EN</button>
+    </div>
+  </div>
+
+  <div style="padding:16px 24px 0;font-size:13px;color:#555">
+    <span style="color:#1a3a6b;font-weight:600">Мои заявки</span> › Новая заявка › Курсы повышения квалификации
+  </div>
+
+  <div class="form-container" style="margin:12px">
+    <div class="progress-bar">
+      <div class="progress-step done">✓ Тип заявки</div>
+      <div class="progress-step active">2. Личные данные</div>
+      <div class="progress-step">3. Дополнительно</div>
+      <div class="progress-step">4. Документы</div>
+    </div>
+    <div class="form-body">
+      <h3>Личные данные</h3>
+      <div style="margin-bottom:12px">
+        <div style="font-size:12px;color:#555;margin-bottom:8px;font-weight:600">Тип заявителя</div>
+        <div class="radio-group">
+          <label><input type="radio" name="type" checked> Физическое лицо</label>
+          <label><input type="radio" name="type"> Юридическое лицо (от организации)</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Фамилия</label>
+          <input type="text" placeholder="Иванов">
+        </div>
+        <div class="form-group">
+          <label>Имя</label>
+          <input type="text" placeholder="Иван">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Отчество</label>
+          <input type="text" placeholder="Иванович">
+        </div>
+        <div class="form-group">
+          <label>ИИН</label>
+          <input type="text" placeholder="000000000000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label>Телефон</label>
+          <input type="text" placeholder="+7 (___) ___-__-__">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Должность</label>
+          <input type="text" placeholder="Учитель математики">
+        </div>
+        <div class="form-group">
+          <label>Место работы</label>
+          <input type="text" placeholder="Школа №5, Алматы">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-back">← Назад</button>
+        <button class="btn-next">Далее →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-container" style="margin:12px">
+    <div class="form-body">
+      <h3>Загрузка документов</h3>
+      <div class="upload-zone">
+        <div class="upload-icon">📎</div>
+        <p>Перетащите файлы сюда или нажмите для выбора</p>
+        <span>PDF, JPG, PNG · до 10 МБ на файл</span>
+      </div>
+      <div class="file-list">
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">udostoverenie.pdf</span>
+          <span class="file-status">✓ Загружен</span>
+        </div>
+        <div class="file-item">
+          <span class="file-icon">📄</span>
+          <span class="file-name">diplom.pdf</span>
+          <span class="file-status">✓ Загружен</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="screen" id="admin">
+  <div class="nav">
+    <div class="nav-logo">НАО <span>Алтынсарина</span> — Администратор</div>
+  </div>
+
+  <div class="admin-layout" style="margin:12px">
+    <div class="admin-sidebar">
+      <div class="admin-sidebar-title">Меню</div>
+      <div class="admin-menu-item active">📋 Все заявки</div>
+      <div class="admin-menu-item">📚 Курсы</div>
+      <div class="admin-menu-item">💼 Вакансии</div>
+      <div class="admin-menu-item">🔬 Научные проекты</div>
+      <div class="admin-menu-item">🎓 Стажировки</div>
+      <div class="admin-menu-item" style="margin-top:16px;border-top:1px solid rgba(255,255,255,.1);padding-top:16px">⚙️ Настройки</div>
+    </div>
+    <div class="admin-content">
+      <h3>Все заявки</h3>
+      <div class="filter-bar">
+        <button class="filter-btn active">Все (24)</button>
+        <button class="filter-btn">На рассмотрении (12)</button>
+        <button class="filter-btn">Принято (8)</button>
+        <button class="filter-btn">Отказано (4)</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ФИО / Организация</th>
+            <th>Тип заявки</th>
+            <th>Дата</th>
+            <th>Статус</th>
+            <th>Действие</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>024</td>
+            <td>Сейткали А.М.</td>
+            <td>Курсы</td>
+            <td>17.03.2025</td>
+            <td><span class="badge badge-pending">На рассмотрении</span></td>
+            <td><button class="action-btn">Открыть</button></td>
+          </tr>
+          <tr>
+            <td>023</td>
+            <td>ТОО «EduGroup»</td>
+            <td>Научный проект</td>
+            <td>16.03.2025</td>
+            <td><span class="badge badge-approved">Принято</span></td>
+            <td><button class="action-btn">Открыть</button></td>
+          </tr>
+          <tr>
+            <td>022</td>
+            <td>Нурланов Б.К.</td>
+            <td>Вакансия</td>
+            <td>15.03.2025</td>
+            <td><span class="badge badge-rejected">Отказ</span></td>
+            <td><button class="action-btn">Открыть</button></td>
+          </tr>
+          <tr>
+            <td>021</td>
+            <td>Ахметова Г.Т.</td>
+            <td>Стажировка</td>
+            <td>14.03.2025</td>
+            <td><span class="badge badge-pending">На рассмотрении</span></td>
+            <td><button class="action-btn">Открыть</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
